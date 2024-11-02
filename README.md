@@ -24,7 +24,7 @@ Tray-Icon ausgestattet, um die Steuerung zu erleichtern.
 Installiere die folgenden Module, bevor du das Skript ausführst:
 
 ```bash
-pip install pypresence pillow pystray
+pip install pypresence pillow pystray webbrowser
 ```
 
 ## Einrichtung
@@ -89,3 +89,4 @@ Dieses Projekt verwendet folgende Open-Source-Bibliotheken:
 - [pypresence](https://github.com/qwertyquerty/pypresence) - zur Interaktion mit Discord Rich Presence.
 - [Pillow](https://python-pillow.org/) - für Bildverarbeitung und die Erstellung des Tray-Icons.
 - [pystray](https://github.com/moses-palmer/pystray) - zur Anzeige und Steuerung eines Tray-Icons.
+- [webbrowser](https://github.com/moses-palmer/pystray) - Erlaubt URLs mit dem Standard System Browser zu öffnen.
