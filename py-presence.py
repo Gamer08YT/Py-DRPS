@@ -98,7 +98,7 @@ def app_id():
     os.system(r"C:\Windows\System32\cmd.exe /c start https://discord.com/developers/applications")
     
 def github_link():
-    os.system(r"C:\Windows\System32\cmd.exe /c start https://github.com/Drazzild/")
+    os.system(r"C:\Windows\System32\cmd.exe /c start https://github.com/Drazzild/Py-DRPS")
 
 menu = (MenuItem("Github", github_link),
         MenuItem("create ID", app_id),
