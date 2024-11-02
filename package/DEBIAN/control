@@ -1,8 +1,0 @@
-Package: py-presence
-Version: 1.0-1
-Section: base
-Priority: optional
-Architecture: all
-Depends: python3
-Maintainer: Py-Presence
-Description: Runs Py-DRPS as Service.
