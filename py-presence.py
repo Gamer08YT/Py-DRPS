@@ -7,6 +7,7 @@ from io import BytesIO
 from pypresence import Presence
 from PIL import Image, ImageDraw
 from pystray import MenuItem, Icon
+import webbrowser
 
 config_file_path = 'config.ini'
 
@@ -87,11 +88,15 @@ def on_exit(icon, item):
     rpc.close()
     os._exit(0)
 
+# Function to open URL
+def open_url(url):
+    webbrowser.open(url)
+
 def app_id():
-    os.system(r"C:\Windows\System32\cmd.exe /c start https://discord.com/developers/applications")
+    open_url("https://discord.com/developers/applications")
     
 def github_link():
-    os.system(r"C:\Windows\System32\cmd.exe /c start https://github.com/Drazzild/Py-DRPS")
+    open_url("https://github.com/Drazzild/Py-DRPS")
 
 menu = (MenuItem("Github", github_link),
         MenuItem("create ID", app_id),
