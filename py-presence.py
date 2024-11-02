@@ -54,24 +54,31 @@ TRAY_ICON_BASE64 = config['RichPresence'].get('tray_icon_base64', '')
 rpc = Presence(CLIENT_ID)
 rpc.connect()
 
-update_args = {
-    "state": STATE,
-    "details": DETAILS,
-    "large_image": LARGE_IMAGE,
-    "small_image": SMALL_IMAGE,
-    "buttons": [
-        {"label": BUTTON1_LABEL, "url": BUTTON1_URL},
-        {"label": BUTTON2_LABEL, "url": BUTTON2_URL}
-    ]
-}
+update_args = {}
 
-if START_ENABLED:
-    update_args["start"] = time.time()
-
+if STATE:
+    update_args["state"] = STATE
+if DETAILS:
+    update_args["details"] = DETAILS
+if LARGE_IMAGE:
+    update_args["large_image"] = LARGE_IMAGE
+if SMALL_IMAGE:
+    update_args["small_image"] = SMALL_IMAGE
 if LARGE_TEXT:
     update_args["large_text"] = LARGE_TEXT
 if SMALL_TEXT:
     update_args["small_text"] = SMALL_TEXT
+
+buttons = []
+if BUTTON1_LABEL:
+    buttons.append({"label": BUTTON1_LABEL, "url": BUTTON1_URL})
+if BUTTON2_LABEL:
+    buttons.append({"label": BUTTON2_LABEL, "url": BUTTON2_URL})
+if buttons:
+    update_args["buttons"] = buttons
+
+if START_ENABLED:
+    update_args["start"] = time.time()
 
 rpc.update(**update_args)
 print("Rich Presence aktiviert!")
@@ -91,7 +98,7 @@ def app_id():
     os.system(r"C:\Windows\System32\cmd.exe /c start https://discord.com/developers/applications")
     
 def github_link():
-    os.system(r"C:\Windows\System32\cmd.exe /c start https://github.com/Drazzild/Py-DRPS")
+    os.system(r"C:\Windows\System32\cmd.exe /c start https://github.com/Drazzild/")
 
 menu = (MenuItem("Github", github_link),
         MenuItem("create ID", app_id),
