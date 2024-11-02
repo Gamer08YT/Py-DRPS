@@ -60,7 +60,7 @@ jobs:
       run: dpkg-deb --build pydrps
 
     - name: Upload Debian package
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: py-presence
         path: pydrps.deb
