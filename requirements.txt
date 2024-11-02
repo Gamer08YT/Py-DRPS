@@ -1,0 +1,10 @@
+configparser
+time
+threading
+os
+base64
+io
+pypresence
+Pillow
+pystray
+webbrowser
