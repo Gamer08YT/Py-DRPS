@@ -1,0 +1,66 @@
+name: Build and Deploy Debian Package
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Create package structure
+      run: |
+        mkdir -p mypackage/DEBIAN
+        mkdir -p mypackage/usr/local/bin
+        mkdir -p mypackage/etc/systemd/system
+
+    - name: Create control file
+      run: |
+        echo "Package: Py-DRPS" > pydrps/DEBIAN/control
+        echo "Version: 1.0-1" >> pydrps/DEBIAN/control
+        echo "Section: base" >> pydrps/DEBIAN/control
+        echo "Priority: optional" >> pydrps/DEBIAN/control
+        echo "Architecture: all" >> pydrps/DEBIAN/control
+        echo "Depends: python3" >> pydrps/DEBIAN/control
+        echo "Maintainer: Py-DRPS" >> pydrps/DEBIAN/control
+        echo "Description: Runs Py-DRPS as Service." >> pydrps/DEBIAN/control
+
+    - name: Copy Python script
+      run: cp py-presence.py pydrps/usr/local/bin/
+
+    - name: Create systemd service file
+      run: |
+        echo "[Unit]" > pydrps/etc/systemd/system/py-presence.service
+        echo "Description=Python Presence Service" >> pydrps/etc/systemd/system/py-presence.service
+        echo "After=network.target" >> pydrps/etc/systemd/system/py-presence.service
+        echo "[Service]" >> pydrps/etc/systemd/system/py-presence.service
+        echo "ExecStart=/usr/bin/python3 /usr/local/bin/py-presence.py" >> pydrps/etc/systemd/system/py-presence.service
+        echo "Restart=always" >> pydrps/etc/systemd/system/py-presence.service
+        echo "User=nobody" >> pydrps/etc/systemd/system/py-presence.service
+        echo "Group=nogroup" >> pydrps/etc/systemd/system/py-presence.service
+        echo "[Install]" >> pydrps/etc/systemd/system/py-presence.service
+        echo "WantedBy=multi-user.target" >> pydrps/etc/systemd/system/py-presence.service
+
+    - name: Build Debian package
+      run: dpkg-deb --build pydrps
+
+    - name: Upload Debian package
+      uses: actions/upload-artifact@v2
+      with:
+        name: py-presence
+        path: pydrps.deb
