@@ -25,9 +25,9 @@ jobs:
 
     - name: Create package structure
       run: |
-        mkdir -p mypackage/DEBIAN
-        mkdir -p mypackage/usr/local/bin
-        mkdir -p mypackage/etc/systemd/system
+        mkdir -p pydrps/DEBIAN
+        mkdir -p pydrps/usr/local/bin
+        mkdir -p pydrps/etc/systemd/system
 
     - name: Create control file
       run: |
