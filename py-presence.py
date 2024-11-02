@@ -103,7 +103,7 @@ def app_id():
     open_url("https://discord.com/developers/applications")
 
 def github_link():
-    open_url("https://github.com/Drazzild/Py-DRPS")
+    open_url("https://github.com/deepCodeloverBoy/Py-DRPS")
 
 menu = (MenuItem("Github", github_link),
         MenuItem("create ID", app_id),
